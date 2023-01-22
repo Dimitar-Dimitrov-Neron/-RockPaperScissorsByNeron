@@ -1,20 +1,26 @@
 import random
 
+print("=" * 50)
+name = (input("Enter your name: ")).title()
+print("=" * 50)
+# Global variables
+rock = "Rock"
+paper = "Paper"
+scissors = "Scissors"
+player_points = 0
+computer_points = 0
+number_of_rounds = 1
+
 running = True
 
-print("=" * 50)
-name = (input("Enter your name: "))
-print("=" * 50)
 print(f"                Greetings {name}")
+print("You gonna play 5 rounds of Rock/Paper/Scissor")
+print("                 Good Luck")
 print("=" * 50)
 
-while running:
+while number_of_rounds < 6:
     # Players Move
-    rock = "Rock"
-    paper = "Paper"
-    scissors = "Scissors"
-    player_points = 0
-    computer_points = 0
+    print(f"                Round: {number_of_rounds}")
     player_move = input("Choose: [r]ock, [p]aper or [s]cissors: ")
     computer_move = ""
     # Players moves with possible options
@@ -43,23 +49,35 @@ while running:
             (player_move == paper and computer_move == rock) or \
             (player_move == scissors and computer_move == paper):
         print("You win!")
+        number_of_rounds += 1
         player_points += 1
         player_points = player_points
         print(f"Your score is: {player_points} points.")
+        print(f"Computer score is: {computer_points} points")
     elif player_move == computer_move:
         print("Draw!")
+        number_of_rounds += 1
         player_points = player_points
         computer_points = computer_points
         print(f"Your score:{player_points}")
         print(f"Computer score:{computer_points}")
     else:
         print("You lose!")
+        number_of_rounds += 1
         computer_points += 1
         computer_points = computer_points
         print(f"Computer score: {computer_points} points.")
+        print(f"Your score is: {player_points} points.")
 
     print("=" * 50)
-    if not input("Play again? (y/n): ").lower() == "y":
+    if number_of_rounds == 6:
         running = False
+        break
 
+if player_points == computer_points:
+    print("Draw!!")
+elif player_points > computer_points:
+    print(f"Congrats {name.title()}, you won the game!!")
+else:
+    print(f"Oops Computer won the game!! Better luck next time {name.title()}!")
 print("Thanks for playing!")
